@@ -15,18 +15,11 @@ public interface TaskRepository extends JpaRepository<Task, Integer>  {
     @Query(value = "SELECT t FROM Task t WHERE t.tmsTaskId = :id")
     List<Task> findTaskById(@Param("id") int taskId);
 
-//    @Transactional
-//    @Modifying
-//    @Query(value = "INSERT INTO tms_tasks (task_group, task_summary, is_finished, logged_time, task_assignee) VALUES (:group, :summary, :loggedTime, :assignee)", nativeQuery = true)
-//    void insertNewTask(@Param("group") String taskGroup, @Param("summary") String taskSummary, @Param("loggedTime") int loggedTime,
-//                       @Param("assignee") String taskAssignee);
-
-
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO tms_tasks (task_group, task_summary, is_finished, logged_time, task_assignee) " +
-            "VALUES (:group, :summary, :isFinished, :loggedTime, :assignee)", nativeQuery = true)
-    void insertNewTask(@Param("group") String taskGroup, @Param("summary") String taskSummary, @Param("isFinished") Boolean isFinishedFlag, @Param("loggedTime") int loggedTime,
+    @Query(value = "INSERT INTO tms_tasks (tms_task_id, task_group, task_summary, is_finished, logged_time, task_assignee) " +
+            "VALUES (:taskId, :group, :summary, :isFinished, :loggedTime, :assignee)", nativeQuery = true)
+    void insertNewTask(@Param("taskId") int taskId, @Param("group") String taskGroup, @Param("summary") String taskSummary, @Param("isFinished") Boolean isFinishedFlag, @Param("loggedTime") int loggedTime,
                         @Param("assignee") String taskAssignee);
 
     @Transactional
@@ -39,8 +32,6 @@ public interface TaskRepository extends JpaRepository<Task, Integer>  {
     @Modifying
     @Query(value = "UPDATE Task t SET t.loggedTime = :loggedTime WHERE t.tmsTaskId = :id")
     void updateLoggedTime(@Param("loggedTime") int loggedTime, @Param("id") int taskId);
-
-//updateTask
 
 
 

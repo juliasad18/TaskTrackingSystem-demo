@@ -5,9 +5,7 @@ import com.tasktracking.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class TasksService {
@@ -26,18 +24,14 @@ public class TasksService {
 
     }
 
-//    public void insertNewTask(List<Task> newTask) {
-//        newTask.forEach(task -> taskRepository.insertNewTask(task.getTaskGroup(), task.getTaskSummary(), task.getLoggedTime(), task.getTaskAssignee()));
-//        //taskGroup, taskSummary, loggedTime, taskAssignee
-//    }
-
     public void insertNewTask(Task task) {
+        int tmsTaskId = task.getTmsTaskId();
         String taskGroup = task.getTaskGroup();
         String taskSummary = task.getTaskSummary();
         Boolean isFinishedFlag = task.getIsFinishedFlag();
         int logTime = task.getLoggedTime();
         String taskAssignee = task.getTaskAssignee();
-        taskRepository.insertNewTask(taskGroup, taskSummary, isFinishedFlag, logTime, taskAssignee);
+        taskRepository.insertNewTask(tmsTaskId, taskGroup, taskSummary, isFinishedFlag, logTime, taskAssignee);
     }
 
     public void removeTaskById(int taskId) {
