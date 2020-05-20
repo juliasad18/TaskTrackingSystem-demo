@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: TaskTrackingSystem
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:file:./db/demo
+    driverClassName: org.h2.Driver
+    platform: h2
+    username: sa
+    password:
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+    jpa:
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.H2Dialect
+          ddl-auto: validate
