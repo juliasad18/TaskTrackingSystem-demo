@@ -8,12 +8,11 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 
 @Entity
-@Table(name = "tms_tasks", schema = "tasktracking")
+@Table(name = "tms_tasks")
 public class Task {
 
     @Id
     @GeneratedValue
-    //@Column(name = "tms_task_id")
     private int tmsTaskId;
 
     @Column(name = "task_group")
@@ -22,8 +21,8 @@ public class Task {
     @Column(name = "task_summary")
     private String taskSummary;
 
-    @Column(name = "is_finished", columnDefinition = "false")
-    private String isFinishedFlag;
+    @Column(name = "is_finished")
+    private Boolean isFinishedFlag;
 
     @Column(name = "logged_time")
     private int loggedTime;
@@ -35,7 +34,7 @@ public class Task {
     }
 
 
-    public Task(int tmsTaskId, String taskGroup, String taskSummary, String isFinishedFlag, int loggedTime, String taskAssignee) {
+    public Task(int tmsTaskId, String taskGroup, String taskSummary, Boolean isFinishedFlag, int loggedTime, String taskAssignee) {
         this.tmsTaskId = tmsTaskId;
         this.taskGroup = taskGroup;
         this.taskSummary = taskSummary;
@@ -56,7 +55,7 @@ public class Task {
         return taskSummary;
     }
 
-    public String getIsFinishedFlag() {
+    public Boolean getIsFinishedFlag() {
         return isFinishedFlag;
     }
 
@@ -80,7 +79,7 @@ public class Task {
         this.taskSummary = taskSummary;
     }
 
-    public void setIsFinishedFlag(String isFinishedFlag) {
+    public void setIsFinishedFlag(Boolean isFinishedFlag) {
         this.isFinishedFlag = isFinishedFlag;
     }
 

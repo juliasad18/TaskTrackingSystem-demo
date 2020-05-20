@@ -26,7 +26,7 @@ public interface TaskRepository extends JpaRepository<Task, Integer>  {
     @Modifying
     @Query(value = "INSERT INTO tms_tasks (task_group, task_summary, is_finished, logged_time, task_assignee) " +
             "VALUES (:group, :summary, :isFinished, :loggedTime, :assignee)", nativeQuery = true)
-    void insertNewTask(@Param("group") String taskGroup, @Param("summary") String taskSummary, @Param("isFinished") String isFinishedFlag, @Param("loggedTime") int loggedTime,
+    void insertNewTask(@Param("group") String taskGroup, @Param("summary") String taskSummary, @Param("isFinished") Boolean isFinishedFlag, @Param("loggedTime") int loggedTime,
                         @Param("assignee") String taskAssignee);
 
     @Transactional

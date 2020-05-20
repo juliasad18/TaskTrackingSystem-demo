@@ -23,16 +23,6 @@ public class Controller {
         return tasksService.findTaskById(taskId);
     }
 
-//    @PostMapping("/addNewTask")
-//    public void createTask(@RequestBody List<Task> newTask){
-//        tasksService.insertNewTask(newTask);
-//    }
-
-//    @PostMapping("/addNewTask")
-//    public void createTask(@RequestBody List<Task> newTask) {
-//        tasksService.insertNewTask();
-//    }
-
     @PostMapping("/addNewTask")
     public void createTask(@RequestBody Task newTask) {
         tasksService.insertNewTask(newTask);
@@ -47,9 +37,6 @@ public class Controller {
     public void updateLoggedTime(@PathVariable("taskId") int taskId, @RequestBody Task task){
         tasksService.updateLoggedTime(taskId,  task);
     }
-
-
-
 
 
 }

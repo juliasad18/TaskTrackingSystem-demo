@@ -34,7 +34,7 @@ public class TasksService {
     public void insertNewTask(Task task) {
         String taskGroup = task.getTaskGroup();
         String taskSummary = task.getTaskSummary();
-        String isFinishedFlag = task.getIsFinishedFlag();
+        Boolean isFinishedFlag = task.getIsFinishedFlag();
         int logTime = task.getLoggedTime();
         String taskAssignee = task.getTaskAssignee();
         taskRepository.insertNewTask(taskGroup, taskSummary, isFinishedFlag, logTime, taskAssignee);
