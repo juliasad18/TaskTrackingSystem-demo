@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/")
-public class Controller {
+public class TaskController {
     @Autowired
     private TasksService tasksService;
 
