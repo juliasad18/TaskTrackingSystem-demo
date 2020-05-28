@@ -33,9 +33,14 @@ public class TaskController {
         tasksService.removeTaskById(taskId);
     }
 
-    @PutMapping("/updateTask/{taskId}")
+    @PutMapping("/logTime/{taskId}")
     public void updateLoggedTime(@PathVariable("taskId") int taskId, @RequestBody Task task){
         tasksService.updateLoggedTime(taskId,  task);
+    }
+
+    @PutMapping("/updateTaskStatus/{taskId}")
+    public void updateTaskStatus(@PathVariable("taskId") int taskId, @RequestBody Task task){
+        tasksService.updateTaskStatus(taskId,  task);
     }
 
 

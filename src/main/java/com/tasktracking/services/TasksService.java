@@ -28,10 +28,11 @@ public class TasksService {
         int tmsTaskId = task.getTmsTaskId();
         String taskGroup = task.getTaskGroup();
         String taskSummary = task.getTaskSummary();
-        Boolean isFinishedFlag = task.getIsFinishedFlag();
+        boolean isFinishedFlag = task.getIsFinishedFlag();
         int logTime = task.getLoggedTime();
         String taskAssignee = task.getTaskAssignee();
-        taskRepository.insertNewTask(tmsTaskId, taskGroup, taskSummary, isFinishedFlag, logTime, taskAssignee);
+        Integer parentTaskId = task.getParentTaskId();
+        taskRepository.insertNewTask(tmsTaskId, taskGroup, taskSummary, isFinishedFlag, logTime, taskAssignee, parentTaskId);
     }
 
     public void removeTaskById(int taskId) {
@@ -43,6 +44,10 @@ public class TasksService {
         taskRepository.updateLoggedTime(logTime, taskId);
     }
 
+    public void updateTaskStatus(int taskId, Task task) {
+        Boolean isFinishedFlag = task.getIsFinishedFlag();
+        taskRepository.updateTaskStatus(isFinishedFlag, taskId);
+    }
 
 
 

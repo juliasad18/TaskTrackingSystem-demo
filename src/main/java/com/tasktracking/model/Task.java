@@ -11,6 +11,7 @@ import javax.persistence.Column;
 public class Task {
 
     @Id
+    @GeneratedValue
     private int tmsTaskId;
 
     @Column(name = "task_group")
@@ -28,17 +29,21 @@ public class Task {
     @Column(name = "task_assignee")
     private String taskAssignee;
 
+    @Column(name = "parent_task_id", nullable = true)
+    private Integer parentTaskId;
+
     public Task() {
     }
 
 
-    public Task(int tmsTaskId, String taskGroup, String taskSummary, Boolean isFinishedFlag, int loggedTime, String taskAssignee) {
+    public Task(int tmsTaskId, String taskGroup, String taskSummary, Boolean isFinishedFlag, int loggedTime, String taskAssignee, Integer parentTaskId) {
         this.tmsTaskId = tmsTaskId;
         this.taskGroup = taskGroup;
         this.taskSummary = taskSummary;
         this.isFinishedFlag = isFinishedFlag;
         this.loggedTime = loggedTime;
         this.taskAssignee = taskAssignee;
+        this.parentTaskId = parentTaskId;
     }
 
     public int getTmsTaskId() {
@@ -65,6 +70,10 @@ public class Task {
         return taskAssignee;
     }
 
+    public Integer getParentTaskId() {
+        return parentTaskId;
+    }
+
     public void setTmsTaskId(int tmsTaskId) {
         this.tmsTaskId = tmsTaskId;
     }
@@ -87,5 +96,9 @@ public class Task {
 
     public void setTaskAssignee(String taskAssignee) {
         this.taskAssignee = taskAssignee;
+    }
+
+    public void setParentTaskId(Integer parentTaskId) {
+        this.parentTaskId = parentTaskId;
     }
 }
