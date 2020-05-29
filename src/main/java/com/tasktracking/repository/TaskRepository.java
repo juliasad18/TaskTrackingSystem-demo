@@ -13,7 +13,10 @@ import java.util.List;
 public interface TaskRepository extends JpaRepository<Task, Integer>  {
 
     @Query(value = "SELECT t FROM Task t WHERE t.tmsTaskId = :id")
-    List<Task> findTaskById(@Param("id") int taskId);
+    Task findTaskById(@Param("id") int taskId);
+
+    @Query(value = "SELECT t FROM Task t WHERE t.parentTaskId = :id")
+    List<Task> findSubTasks(@Param("id") int taskId);
 
     @Transactional
     @Modifying

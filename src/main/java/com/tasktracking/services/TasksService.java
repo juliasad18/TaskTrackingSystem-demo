@@ -2,6 +2,7 @@ package com.tasktracking.services;
 
 import com.tasktracking.model.Task;
 import com.tasktracking.repository.TaskRepository;
+import com.tasktracking.validation.TaskCompletionValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ public class TasksService {
 
     @Autowired
     public TaskRepository taskRepository;
+    public TaskCompletionValidation taskCompletionValidation;
 
 
     public List<Task> findTasks() {
@@ -45,8 +47,10 @@ public class TasksService {
     }
 
     public void updateTaskStatus(int taskId, Task task) {
-        Boolean isFinishedFlag = task.getIsFinishedFlag();
-        taskRepository.updateTaskStatus(isFinishedFlag, taskId);
+        if (taskCompletionValidation.isSetTaskCompletedAllowed(taskId)) {
+            Boolean isFinishedFlag = task.getIsFinishedFlag();
+            taskRepository.updateTaskStatus(isFinishedFlag, taskId);
+        }
     }
 
 

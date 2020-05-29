@@ -27,9 +27,9 @@ public class TaskControllerTest {
     @Test
     public void countDataTest() {
 
-        Task taskForTest1 = new Task(11, "TEST", "Test 1st row", false, 10, "Tester");
-        Task taskForTest2 = new Task(12, "TEST", "Test 2nd row", false, 10, "Tester");
-        Task taskForTest3 = new Task(13, "TEST", "Test 3rd row", false, 10, "Tester");
+        Task taskForTest1 = new Task(11, "TEST", "Test 1st row", false, 10, "Tester", null);
+        Task taskForTest2 = new Task(12, "TEST", "Test 2nd row", false, 10, "Tester", null);
+        Task taskForTest3 = new Task(13, "TEST", "Test 3rd row", false, 10, "Tester", null);
         List<Task> tasksList = Arrays.asList(taskForTest1, taskForTest2, taskForTest3);
 
         when(tasksServiceMock.findTasks()).thenReturn(tasksList); //insert dummy list into TasksService -> findTasks(), not from the DB
