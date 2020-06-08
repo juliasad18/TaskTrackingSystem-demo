@@ -2,6 +2,7 @@ package com.tasktracking.services;
 
 import com.tasktracking.model.Task;
 import com.tasktracking.repository.TaskRepository;
+import com.tasktracking.validation.DeleteTaskValidation;
 import com.tasktracking.validation.TaskCompletionValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class TasksService {
 
     @Autowired
     public TaskCompletionValidation taskCompletionValidation;
+
+    @Autowired
+    public DeleteTaskValidation deleteTaskValidationValidation;
 
 
     public List<Task> findTasks() {
@@ -40,6 +44,12 @@ public class TasksService {
     }
 
     public void removeTaskById(int taskId) {
+        int[] listOfTasksToDelete = deleteTaskValidationValidation.getSubTasksToDelete(taskId);
+        if (!(listOfTasksToDelete.length == 0)) {
+            for (int taskToDelete : listOfTasksToDelete) {
+                taskRepository.removeTaskById(taskToDelete);
+            }
+        }
         taskRepository.removeTaskById(taskId);
     }
 
