@@ -3,9 +3,11 @@ package com.tasktracking.validation;
 import com.tasktracking.model.Task;
 import com.tasktracking.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TaskCompletionValidation {
 
     @Autowired
@@ -13,10 +15,20 @@ public class TaskCompletionValidation {
 
     public boolean isTaskAParentTask(int taskId) {
         Task task = taskRepository.findTaskById(taskId);
-        if(task.getParentTaskId().equals(null)){
+        Integer parentTaskId = task.getParentTaskId();
+        if(parentTaskId == null){
             return true;
         } else {
             return false;
+        }
+    }
+
+    public boolean doesTaskHaveSubTask(int taskId){
+        List<Task> subTaskList = taskRepository.findSubTasks(taskId);
+        if (subTaskList.size() == 0) {
+            return false;
+        } else {
+            return true;
         }
     }
 
@@ -46,13 +58,17 @@ public class TaskCompletionValidation {
 
     public boolean isSetTaskCompletedAllowed(int taskId) {
         if (isTaskAParentTask(taskId)) {
-            if(areTasksCompleted(getSubTaskIds(taskId))) {
-                return true;
+            if (doesTaskHaveSubTask(taskId)) {
+                if(areTasksCompleted(getSubTaskIds(taskId))) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
-                return false;
+                return true;
             }
         } else {
-            return false;
+            return true;
         }
     }
 

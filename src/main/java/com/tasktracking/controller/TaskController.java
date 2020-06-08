@@ -19,7 +19,7 @@ public class TaskController {
     }
 
     @GetMapping("/getTask/{taskId}")
-    public List<Task> getTaskById(@PathVariable("taskId") int taskId) {
+    public Task getTaskById(@PathVariable("taskId") int taskId) {
         return tasksService.findTaskById(taskId);
     }
 

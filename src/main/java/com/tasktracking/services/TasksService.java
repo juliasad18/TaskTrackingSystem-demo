@@ -13,6 +13,8 @@ public class TasksService {
 
     @Autowired
     public TaskRepository taskRepository;
+
+    @Autowired
     public TaskCompletionValidation taskCompletionValidation;
 
 
@@ -21,8 +23,8 @@ public class TasksService {
 
     }
 
-    public List<Task> findTaskById(int taskId) {
-        return (List<Task>) taskRepository.findTaskById(taskId);
+    public Task findTaskById(int taskId) {
+        return taskRepository.findTaskById(taskId);
 
     }
 
@@ -52,13 +54,6 @@ public class TasksService {
             taskRepository.updateTaskStatus(isFinishedFlag, taskId);
         }
     }
-
-
-
-
-
-
-
 
 
 }
